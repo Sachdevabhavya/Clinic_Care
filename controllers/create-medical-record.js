@@ -1,30 +1,30 @@
-const labrecordscollection = require("../model/labtestrecords");
+const medrecordscollection = require("../model/medicalrecords");
 
 const sendrecords = async (req, res) => {
-    const { patient_name, age, test_results } = req.body;
+    const { patient_name, age, medicines } = req.body;
 
     console.log("Request Body:", req.body);
 
     // Log individual fields
     console.log("Patient Name:", patient_name);
     console.log("Age:", age);
-    console.log("Test Results:", test_results);
+    console.log("Medicines:", medicines);
 
-    if (!patient_name || !age || !test_results) {
+    if (!patient_name || !age || !medicines) {
         console.log("Validation failed: Missing fields");
         return res.status(400).json({ message: "All fields must be provided" });
     }
 
     try {
-        const labrecords = new labrecordscollection({
+        const medrecords = new medrecordscollection({
             patient_name,
             age,
-            test_results
+            medicines
         });
 
-        const saverecords = await labrecords.save();
-        console.log(`Lab Record created successfully: ${saverecords}`);
-        console.log(`Lab Record created with id: ${saverecords._id}`);
+        const saverecords = await medrecords.save();
+        console.log(`Med Record created successfully: ${saverecords}`);
+        console.log(`Med Record created with id: ${saverecords._id}`);
         return res.status(201).json({ message: "Record created successfully", record: saverecords });
 
     } catch (error) {
