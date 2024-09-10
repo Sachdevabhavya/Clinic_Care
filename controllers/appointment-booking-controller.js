@@ -33,16 +33,20 @@ const getAllAppointments = async (req, res) => {
 
 //create appointment
 const createAppointment = async (req, res) => {
-  const { patient_name, age, description, phone_no, home_address } = req.body;
-
+  const { patient_name, age, description, phone_no, home_address , approved} = req.body;
+  const obj = req.user
+  console.log("Token",obj)
   console.log("Request Body:", req.body);
 
-  if (!patient_name || !age || !description || !phone_no || !home_address) {
+  if(obj.roleId != 1){
+    consol.log("Invalid user")
+    return res.status(200).json({messsage : "Only Patients are allowed to access"})
+  }
+
+  if ( !age || !description || !home_address) {
     console.log("Missing fields:", {
-      patient_name: !!patient_name,
       age: !!age,
       description: !!description,
-      phone_no: !!phone_no,
       home_address: !!home_address,
     });
     return res.status(400).json({ message: "All fields must be provided." });
@@ -50,11 +54,12 @@ const createAppointment = async (req, res) => {
 
   try {
     const newAppointment = new book_appointment({
-      patient_name,
+      patient_name : obj.name,
       age,
       description,
-      phone_no,
+      phone_no : obj.phone_no,
       home_address,
+      approved : false
     });
 
     const savedAppointment = await newAppointment.save();
@@ -62,7 +67,7 @@ const createAppointment = async (req, res) => {
     console.log(`Appointment created:\n ${savedAppointment}`);
     console.log(`Appointment created with id : ${savedAppointment._id}`)
 
-    return res.status(201).json({ message: "Appointment Created Successfully", appointment: savedAppointment });
+    return res.status(200).json({ message: "Appointment Created Successfully", appointment: savedAppointment });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Server Error" });
