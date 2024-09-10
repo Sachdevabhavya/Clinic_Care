@@ -25,6 +25,11 @@ const appointment_book = new mongoose.Schema(
             type : String,
             required : true   
         },
+
+        approved : {
+            type : Boolean,
+            required : true
+        }
     },
     {timestamps : true}
 )
