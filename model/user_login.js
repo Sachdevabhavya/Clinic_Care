@@ -33,6 +33,11 @@ const signUpSchema = new mongoose.Schema(
             type : String,
         },
 
+        roleId : {
+            type : Number,
+            required : true
+        },
+
         qrcode : {
             type : String
         }
