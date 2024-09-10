@@ -20,6 +20,16 @@ const labtestSchema = new mongoose.Schema({
 });
 
 const labRecords = new mongoose.Schema({
+    doctor_id : {
+        type : String,
+        required : true
+    },
+
+    doctor_name : {
+        type : String,
+        required : true
+    },
+
     patient_name: {
         type: String, 
         required: true
