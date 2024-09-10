@@ -4,10 +4,15 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 
 const { generateQrCode } = require("../middleware/doctor_qrcode");
+const {doctor_generate_token} = require("../utils/generateToken")
 
 //doctor login
 const login = async (req, res, next) => {
   const { email, password } = req.body;
+
+  if(!email || !password){
+    return res.status(400).json({ message: "All fields must be provided." });
+  }
 
   console.log("Request Headers:", req.headers);
   console.log("Request Body:", req.body);
@@ -31,10 +36,18 @@ const login = async (req, res, next) => {
       return res.status(400).json({ message: "Incorrect Password" });
     }
 
-    console.log(`Login Successful with DoctorId ${existing_doctor._id}`);
-    return res.status(200).json({
-      message: `Login Successful with DoctorId ${existing_doctor._id}`,
-    });
+    existing_doctor.roleId = 2
+    token = doctor_generate_token(existing_doctor)
+
+    if (!token) {
+      return res.status(400).json({ message: "Token not generated" });
+    }
+
+    console.log("token generated success")
+    console.log(`Login Successful with userId ${existing_doctor._id}`);
+    console.log(token)
+    return res.send(token)
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error", error });
@@ -71,6 +84,7 @@ const signUp = async (req, res, next) => {
       email,
       password: hashedPassword,
       Hname,
+      roleId : 2,
       doctor_image: req.file ? req.file.filename : null, 
     });
 
