@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const multer = require("multer");
 
 const { generateQrCode } = require("../middleware/user_qrcode");
-
+const {user_generate_token} = require("../utils/generateToken")
 
 //user signup
 const signUp = async (req, res, next) => {
@@ -34,6 +34,7 @@ const signUp = async (req, res, next) => {
       email,
       password: hashedPassword,
       hname,
+      roleId : 1,
       user_image: req.file ? req.file.filename : null, 
     });
 
@@ -69,6 +70,10 @@ const UploadImgMiddleware = (req, res, next) => {
 const login = async (req, res, next) => {
   const { email, password } = req.body;
 
+  if(!email || !password){
+    return res.status(400).json({ message: "All fields must be provided." });
+  }
+
   console.log("Request Headers:", req.headers); 
   console.log("Request Body:", req.body); 
 
@@ -86,8 +91,18 @@ const login = async (req, res, next) => {
       return res.status(400).json({ message: "Incorrect Password" });
     }
 
+    existing_user.roleId = 1
+    token = user_generate_token(existing_user)
+
+    if (!token) {
+      return res.status(400).json({ message: "Token not generated" });
+    }
+
+    console.log("token generated success")
     console.log(`Login Successful with userId ${existing_user._id}`);
-    return res.status(200).json({ message: `Login Successful with userId ${existing_user._id}` });
+    console.log(token)
+    return res.send(token)
+
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error", error });
