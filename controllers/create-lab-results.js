@@ -2,7 +2,8 @@ const labrecordscollection = require("../model/labtestrecords");
 
 const sendrecords = async (req, res) => {
     const { patient_name, age, test_results } = req.body;
-
+    const obj = req.user
+    console.log("Token",obj)
     console.log("Request Body:", req.body);
 
     if (!patient_name || !age || !test_results) {
@@ -10,7 +11,15 @@ const sendrecords = async (req, res) => {
     }
 
     try {
+        
+        if(obj.roleId != 2){
+            consol.log("Invalid user")
+            return res.status(200).json({messsage : "Only Doctors are allowed to access"})
+          }
+
         const labrecords = new labrecordscollection({
+            doctor_id : obj.id,
+            doctor_name : obj.name,
             patient_name,
             age,
             test_results
