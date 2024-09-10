@@ -21,11 +21,16 @@ const doctorSignUpSchema = new mongoose.Schema(
         password : {
             type : String,
             required : true,
-            minlenght : 8
+            minlength : 8
         },
 
         Hname : {
             type : String,
+            required : true
+        },
+
+        roleId : {
+            type : Number,
             required : true
         },
 
