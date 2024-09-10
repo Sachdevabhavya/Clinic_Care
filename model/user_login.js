@@ -29,11 +29,6 @@ const signUpSchema = new mongoose.Schema(
             required : true
         },
 
-        roleId : {
-            type : Number,
-            required : true
-        },
-
         user_image : {
             type : String,
         },
