@@ -8,6 +8,7 @@ const appointment_router = require("./routes/appointment_booking_routes");
 const med_router = require("./routes/medical_routes")
 const lab_router = require("./routes/lab_routes")
 const approve_router = require("./routes/appointment_approve_routes")
+const get_doctors = require("./routes/get_all_doctors")
 // const order_router = require("./routes/order_medicine_routes");
 
 const app = express();
@@ -22,6 +23,7 @@ app.use('/main', appointment_router);
 app.use('/main',med_router)
 app.use('/main',lab_router)
 app.use('/main',approve_router)
+app.use('/main',get_doctors)
 // app.use('/api', order_router);
 
 const PORT = 4000;
