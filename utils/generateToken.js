@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken")
-const {user_secret , doctor_secret} = require("../config/jwtconfig")
+const {user_secret , doctor_secret , reset_secret} = require("../config/jwtconfig")
 
 const user_generate_token = (user) => {
     const payload = {
@@ -25,7 +25,16 @@ const doctor_generate_token = (user) => {
     return jwt.sign(payload , doctor_secret , {expiresIn:'1h'})
 }
 
+const forgot_password_token = (user) => {
+    const payload = {
+        id : user.id,
+        email : user.email
+    }
+    return jwt.sign(payload, reset_secret , {expiresIn: '1h'})
+}
+
 module.exports = {
     user_generate_token,
-    doctor_generate_token
+    doctor_generate_token,
+    forgot_password_token
 }
