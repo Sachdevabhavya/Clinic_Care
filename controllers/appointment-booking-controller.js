@@ -39,7 +39,7 @@ const createAppointment = async (req, res) => {
   console.log("Request Body:", req.body);
 
   if(obj.roleId != 1){
-    consol.log("Invalid user")
+    console.log("Invalid user")
     return res.status(200).json({messsage : "Only Patients are allowed to access"})
   }
 

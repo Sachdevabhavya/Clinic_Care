@@ -36,6 +36,30 @@ const sendrecords = async (req, res) => {
     }
 };
 
+const getAllLabRecords = async(req , res) => {
+    const obj = req.user
+    console.log(obj)
+    try {
+        if(obj.roleId !=1){
+            console.log("Invalid user")
+            return res.status(200).json({messsage : "Only Patients are allowed to access"})
+        }
+
+        const p_labrecords = await labrecordscollection.find({
+                patient_name : obj.name
+        })
+
+        console.log("Patient med records ", p_labrecords)
+        return res.status(200).json({message : "Med records", p_labrecords})
+        
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({ message: "Server Error" });
+    }
+}
+
+
 module.exports = {
-    sendrecords
+    sendrecords,
+    getAllLabRecords
 };

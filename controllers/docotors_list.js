@@ -19,4 +19,4 @@ const get_all_doctors = async (req, res) => {
     }
 }
 
-module.exports = get_all_doctors
+module.exports = {get_all_doctors}
