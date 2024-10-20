@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken")
 const {user_secret, doctor_secret , reset_secret} = require("../config/jwtconfig")
 
 const user_auth_middleware = async(req,res,next) => {
-    var token = req.params.token
-
+    const token = req.params.token
+    console.log("Token recieve" , token)
     if(!token) {
         return res.status(404).json({message : "Access denied , no token provided"})
     }
