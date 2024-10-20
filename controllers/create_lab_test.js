@@ -4,7 +4,7 @@ const lab_tests = require("../model/lab_test")
 const create_lab_test = async(req, res) => {
     const {test_name , test_details} = req.body
     const obj = req.user
-
+    
     if(!test_name || !test_details){
         return res.status(400).json({ message: "All fields must be provided." });
     }

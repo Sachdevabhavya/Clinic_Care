@@ -46,7 +46,7 @@ const login = async (req, res, next) => {
     console.log("token generated success")
     console.log(`Login Successful with userId ${existing_doctor._id}`);
     console.log(token)
-    return res.send(token)
+    return res.redirect(`/main/doctor_login/${token}/doctor_dashboard`)
 
   } catch (error) {
     console.log(error);
@@ -93,9 +93,7 @@ const signUp = async (req, res, next) => {
     await doctor.save();
     console.log(`Doctor created successfully: ${doctor}`);
     console.log(`Doctor successfully saved with id: ${doctor._id}`);
-    return res
-      .status(201)
-      .json({ message: "Doctor created successfully", doctor });
+    return res.redirect('/main/doctor_login');
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Internal server error", error });

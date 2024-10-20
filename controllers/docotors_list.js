@@ -1,7 +1,7 @@
 const list_doctors = require("../model/doctor_login")
 
 const get_all_doctors = async (req, res) => {
-
+    const token = req.params.token
     try {
         const obj = req.user
 
@@ -11,8 +11,9 @@ const get_all_doctors = async (req, res) => {
 
         const doctors = await list_doctors.find()
         console.log("Doctors",doctors)
-        
-        return res.status(200).json({message:"Doctors",doctors})
+        res.render("list_of_doctors", {token, doctors });
+
+        // return res.redirect('book_appointments')
     } catch (error) {
         console.log(error)
         return res.status(500).json({ message: "Server Error" });
