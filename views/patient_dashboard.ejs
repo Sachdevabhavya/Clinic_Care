@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Dashboard</title>
+    <link rel="stylesheet" href="/patient_dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="sidebar-item active">Clinic Care</div>
+        <div class="sidebar-item"><a href="/main/patient_login/<%= token %>/doctors">Doctors</a></div>
+        <div class="sidebar-item"><a href="/main/patient_login/<%= token %>/medical_records">Medical Records</a></div> 
+        <div class="sidebar-item"><a href="/main/patient_login/<%= token %>/lab_tests">Lab Tests</a></div>
+        <div class="sidebar-item"><a href="/main/patient_login/<%= token %>/lab_records">Lab test Records</a></div>
+    </div>
+    <div class="main-content">
+        <header>
+            <input type="text" placeholder="Enter keywords...">
+        </header>
+        <section class="medical-history">
+            <div class="patient-info">
+                <h2>Dashboard</h2>
+                <div class="patient-card">
+                    <img id="patientImage" alt="patient Photo" />
+                    <div class="patient-details">
+                        <p><strong>Name:</strong> <%= obj.name %></p>
+                        <p><strong>Email:</strong> <%= obj.email %></p>
+                        <p><strong>Contact:</strong> <%= obj.phone_no %></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="medical-info">
+                <div class="info-card">
+                    <h3>Prescription</h3>
+                    <p>Persistent dry cough for 3 weeks. 
+                        Shortness of breath, especially during exertion.
+                        Fatigue and mild chest discomfort.
+                        No fever or chills</p>
+                </div>
+                <div class="info-card">
+                    <h3>Results</h3>
+                    <p>Chest X-ray: Normal, no signs of pneumonia or lung cancer. <br>
+                        Pulmonary Function Test: Mild obstruction in airflow consistent with bronchitis. <br>
+                        Blood Test: Normal white blood cell count, indicating no active infection. <br>
+                        Oxygen Saturation: 95% on room air.</p>
+                </div>
+            </div>
+            <div class="symptoms-diagnosis">
+                <div class="info-card">
+                    <h3>Symptoms</h3>
+                    <p>Diagnosis: Mild Bronchitis <br>
+                        Type: Chronic, non-infectious <br>
+                        Cause: Likely due to environmental irritants (e.g., pollution, smoking)</p>
+                </div>
+                <div class="info-card">
+                    <h3>Diagnosis</h3>
+                    <p>Diagnosis: Mild Bronchitis  <br>
+                        Type: Chronic, non-infectious <br>
+                        Cause: Likely due to environmental irritants (e.g., pollution, smoking)</p>
+                </div>
+            </div>
+            <div class="metrics">
+                <div class="metric-card">
+                    <h4>Glucose</h4>
+                    <p>97 mg/dl</p>
+                    <span>In the norm</span>
+                </div>
+                <div class="metric-card abnormal">
+                    <h4>Heart rate</h4>
+                    <p>102 bpm</p>
+                    <span>Above the norm</span>
+                </div>
+                <div class="metric-card abnormal">
+                    <h4>Cholesterol</h4>
+                    <p>105 mg/dl</p>
+                    <span>Above the norm</span>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        const email = "<%= obj.email %>";
+        const imgElement = document.getElementById('patientImage');
+        const possibleExtensions = ['jpeg', 'jpg', 'png'];
+    
+        possibleExtensions.forEach(ext => {
+            const img = new Image();
+            img.src = `/user_images/${email}.${ext}`;
+            img.onload = () => {
+                imgElement.src = img.src;
+            };
+        });
+    </script>
+</body>
+</html>

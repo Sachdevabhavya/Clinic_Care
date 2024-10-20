@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Lab test</title>
+    <link rel="stylesheet" href="/labs_book.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <a href="#">Home</a>
+            <a href="#">Doctors</a>
+            <a href="#">Appointments</a>
+            <a href="#">Specialties</a>
+            <a href="#">Hospitals</a>
+            <a href="#">Settings</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main">
+            <!-- Header -->
+            <div class="header">
+                <h2>Lab Test Booking</h2>
+            </div>
+
+            <!-- Lab Test Appointment Form Section -->
+            <div class="appointment-form">
+                <h3>Book a Lab Test</h3>
+                <form action="/main/patient_login/<%= token %>/<%= doctor_id %>/lab_appointment" method="POST">
+                
+
+                    <div>
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="age" required>
+                    </div>
+
+                    <div>
+                        <label for="test_name">Test Name:</label>
+                        <input type="text" id="test_name" name="test_name" required>
+                    </div>
+                    <button type="submit">Book Appointment</button>
+                </form>
+            </div>
+            
+            <!-- Doctors List Section -->
+            <div class="labs_test-list">
+                <h3>Available Lab Test</h3>
+                <ul>
+                    <li>Hemogram</li>
+                    <li>Liver Function Profile</li>
+                    <li>liver & Kidney Profile</li>
+                    <li>Vitamin D, B12, Vitamin Plus</li>
+                    <li>Culture, Urine with susceptibility</li>
+                    <li>CBC(Complete Blood Count)</li>
+                    <li>Dengue Fever NS1 Antigen</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

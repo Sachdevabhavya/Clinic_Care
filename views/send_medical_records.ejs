@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Records</title>
+    <link rel="stylesheet" href="/medical_records_upload.css">
+    <script>
+        // Function to dynamically add a new set of medicine input fields
+        function addMedicine() {
+            const medicineSection = document.createElement('div');
+            medicineSection.classList.add('medicine-group');
+
+            medicineSection.innerHTML = `
+                <div class="medicine-header">
+                    <h4>Medicine</h4>
+                    <button type="button" class="remove-btn" onclick="removeMedicine(this)">Remove</button>
+                </div>
+                <div class="form-group">
+                    <label for="medicine_name">Medicine Name:</label>
+                    <input type="text" name="medicine_name[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="dosage">Dosage:</label>
+                    <input type="text" name="dosage[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <textarea name="description[]" required></textarea>
+                </div>
+            `;
+
+            document.getElementById('medicines').appendChild(medicineSection);
+        }
+
+        // Function to remove a specific set of medicine input fields
+        function removeMedicine(button) {
+            button.parentElement.parentElement.remove();
+        }
+
+        // Function to dynamically add a new set of symptom input fields
+        function addSymptom() {
+            const symptomSection = document.createElement('div');
+            symptomSection.classList.add('symptom-group');
+
+            symptomSection.innerHTML = `
+                <div class="symptom-header">
+                    <h4>Symptom</h4>
+                    <button type="button" class="remove-btn" onclick="removeSymptom(this)">Remove</button>
+                </div>
+                <div class="form-group">
+                    <label for="diagnosis">Diagnosis:</label>
+                    <input type="text" name="diagnosis[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="type">Type:</label>
+                    <input type="text" name="symptom_type[]" required>
+                </div>
+                <div class="form-group">
+                    <label for="cause">Cause:</label>
+                    <input type="text" name="cause[]" required>
+                </div>
+            `;
+
+            document.getElementById('symptoms').appendChild(symptomSection);
+        }
+
+        // Function to remove a specific set of symptom input fields
+        function removeSymptom(button) {
+            button.parentElement.parentElement.remove();
+        }
+    </script>
+</head>
+<body>
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="#">Home</a>
+        <a href="#">Doctors</a>
+        <a href="#">Appointments</a>
+        <a href="#">Medical Records</a>
+        <a href="#">Hospitals</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <h2>Medical Records</h2>
+        <form action="/main/doctor_login/<%= token %>/create_medical_records" method="POST">
+            <!-- Patient Information -->
+            <div class="form-group">
+                <label for="patient_name">Patient Name:</label>
+                <input type="text" id="patient_name" name="patient_name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" required>
+            </div>
+
+            <!-- Medicines Section -->
+            <h3>Medicines</h3>
+            <div id="medicines">
+                <!-- Default medicine input fields -->
+                <div class="medicine-group">
+                    <div class="form-group">
+                        <label for="medicine_name">Medicine Name:</label>
+                        <input type="text" name="medicine_name[]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dosage">Dosage:</label>
+                        <input type="text" name="dosage[]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description:</label>
+                        <textarea name="description[]" required></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button to add another medicine -->
+            <button type="button" class="add-btn" onclick="addMedicine()">Add Another Medicine</button>
+
+            <!-- Symptoms Section -->
+            <h3>Symptoms</h3>
+            <div id="symptoms">
+                <!-- Default symptom input fields -->
+                <div class="symptom-group">
+                    <div class="form-group">
+                        <label for="diagnosis">Diagnosis:</label>
+                        <input type="text" name="diagnosis[]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type:</label>
+                        <input type="text" name="symptom_type[]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cause">Cause:</label>
+                        <input type="text" name="cause[]" required>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Button to add another symptom -->
+            <button type="button" class="add-btn" onclick="addSymptom()">Add Another Symptom</button>
+
+            <!-- Submit Button -->
+            <div class="form-group">
+                <button type="submit">Submit Medical Records</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

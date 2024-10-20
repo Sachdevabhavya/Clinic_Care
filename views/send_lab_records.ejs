@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Records Upload</title>
+    <link rel="stylesheet" href="/lab_records_upload.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <h2>Menu</h2>
+            <a href="#">Home</a>
+            <a href="#">Doctors</a>
+            <a href="#">Lab Records</a>
+            <a href="#">Appointments</a>
+            <a href="#">Specialties</a>
+            <a href="#">Hospitals</a>
+            <a href="#">Location</a>
+        </div>
+
+        <div class="main">
+            <h2>Upload Lab Test Records</h2>
+            <form id="labForm" action="/main/doctor_login/<%= token %>/create_lab_records" method="POST">
+                <label for="patient_name">Patient Name:</label>
+                <input type="text" id="patient_name" name="patient_name" placeholder="Enter Patient's Name" required>
+
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" placeholder="Enter Patient's Age">
+
+                <div id="testList">
+                    <h3>Lab Tests</h3>
+                    <div class="labTest">
+                        <label for="test_name">Test Name:</label>
+                        <input type="text" name="test_name[]" required>
+
+                        <label for="description">Description:</label>
+                        <textarea name="description[]" rows="3" placeholder="Describe the test" required></textarea>
+
+                        <label for="results">Results:</label>
+                        <textarea name="results[]" rows="3" placeholder="Enter the test results" required></textarea>
+
+                        <label for="conclusion">Conclusion:</label>
+                        <textarea name="conclusion[]" rows="3" placeholder="Enter the conclusion" required></textarea>
+                    </div>
+                </div>
+
+                <button type="button" onclick="addTest()">Add Another Test</button>
+                <button type="submit">Upload Records</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Function to add another lab test input group
+        function addTest() {
+            const testDiv = document.createElement('div');
+            testDiv.className = 'labTest';
+            testDiv.innerHTML = `
+                <label for="test_name">Test Name:</label>
+                <input type="text" name="test_name[]" required>
+
+                <label for="description">Description:</label>
+                <textarea name="description[]" rows="3" placeholder="Describe the test" required></textarea>
+
+                <label for="results">Results:</label>
+                <textarea name="results[]" rows="3" placeholder="Enter the test results" required></textarea>
+
+                <label for="conclusion">Conclusion:</label>
+                <textarea name="conclusion[]" rows="3" placeholder="Enter the conclusion" required></textarea>
+            `;
+            document.getElementById('testList').appendChild(testDiv);
+        }
+    </script>
+</body>
+</html>

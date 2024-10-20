@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Doctor</title>
+    <link rel="stylesheet" href="/find_doctors.css"> 
+</head>
+<body>
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="#">Home</a>
+        <a href="#">Doctors</a>
+        <a href="#">Appointments</a>
+        <a href="#">Specialties</a>
+        <a href="#">Hospitals</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <!-- Header -->
+        <div class="header">
+            <h2>Find a Doctor</h2>
+        </div>
+
+        <!-- Dropdown Section -->
+        <div class="search-section">
+            <h3>Select Location and Specialist</h3>
+            <form>
+                <div class="dropdown">
+                    <label for="location">Location:</label>
+                    <select id="location" name="location">
+                        <option value="Vashi">Vashi</option>
+                        <option value="Seawoods">Seawoods</option>
+                        <option value="Kharghar">Kharghar</option>
+                        <option value="Panvel">Panvel</option>
+                        <option value="Nerul">Nerul</option>
+                    </select>
+                </div>
+                <div class="dropdown">
+                    <label for="specialist">Specialist:</label>
+                    <select id="specialist" name="specialist">
+                        <option value="Cardiologist">Cardiologist</option>
+                        <option value="Dermatologist">Dermatologist</option>
+                        <option value="Neurologist">Neurologist</option>
+                        <option value="Orthopedic">Orthopedic</option>
+                        <option value="Pediatrician">Pediatrician</option>
+                    </select>
+                </div>
+                <button type="submit">Find Doctors</button>
+            </form>
+        </div>
+
+        <!-- Doctors List Section -->
+        <div class="doctors-list">
+            <h3>Available Doctors</h3>
+            <div class="doctor-cards">
+                <% doctors.forEach(doctor => { %>
+                    <div class="doctor-card">
+                        <img src="/doctor_images/<%= doctor.email %>.jpeg" alt="<%= doctor.name %>" class="doctor-image">
+                        <div class="doctor-info">
+                            <h4><%= doctor.name %></h4>
+                            <p>Email: <%= doctor.email %></p>
+                            <p>Hospital: <%= doctor.Hname %></p>
+                            <button class="book-appointment" data-doctor-id="<%= doctor._id %>">Book Appointment</button>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </div>
+
+        <!-- Hidden input field for token -->
+        <input type="hidden" id="token" value="<%= token %>">
+        
+    </div>
+</div>
+
+<script>
+    document.querySelectorAll('.book-appointment').forEach(button => {
+        button.addEventListener('click', function() {
+            const doctorId = this.getAttribute('data-doctor-id');
+            const token = document.getElementById('token').value; // Get the token from the hidden input field
+            const appointmentUrl = `/main/patient_login/${token}/${doctorId}/create_appointment`;
+            window.location.href = appointmentUrl; // Redirect to the appointment URL
+        });
+    });
+
+    
+</script>
+
+</body>
+</html>

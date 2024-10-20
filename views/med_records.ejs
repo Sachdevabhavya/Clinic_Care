@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Records Viewer</title>
+    <link rel="stylesheet" href="/med_records.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="#">Prescription</a>
+        <a href="#">Categories</a>
+        <a href="#">Pages</a>
+        <a href="#">Comments</a>
+        <a href="#">Appearance</a>
+        <a href="#">Health Data</a>
+        <a href="#">Users</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <!-- Header -->
+        <div class="header">
+            <h2>Medical History</h2>
+            <div class="user-info">
+                <p>Name: <%= name %></p>
+                <p>Email: <%= email %></p>
+                <p>Contact: <%= phone_no %></p>
+            </div>
+        </div>
+
+        <!-- Combined Medical Info Card -->
+        <% p_medrecords.forEach(record => { %>
+            <div class="combined-card">
+                <h3>Prescription</h3>
+        
+                <!-- Display Medicines -->
+                <h4>Medicines</h4>
+                <% if (record.medicines.length) { %>
+                    <% record.medicines.forEach(medicine => { %>
+                        <div class="medicine-details">
+                            <p><strong>Medicine Name:</strong> <%= medicine.medicine_name %></p>
+                            <p><strong>Dosage:</strong> <%= medicine.dosage %></p>
+                            <p><strong>Description:</strong> <%= medicine.description || 'N/A' %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No medicines prescribed.</p>
+                <% } %>
+        
+                <!-- Display Symptoms -->
+                <h4>Symptoms</h4>
+                <% if (record.symptoms && record.symptoms.length) { %>
+                    <% record.symptoms.forEach(symptom => { %>
+                        <div class="symptom-details">
+                            <p><strong>Diagnosis:</strong> <%= symptom.diagnosis %></p>
+                            <p><strong>Type:</strong> <%= symptom.type %></p>
+                            <p><strong>Cause:</strong> <%= symptom.cause || 'N/A' %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No symptoms recorded.</p>
+                <% } %>
+            </div>
+        <% }) %>
+        
+
+    </div>
+</div>
+
+</body>
+</html>

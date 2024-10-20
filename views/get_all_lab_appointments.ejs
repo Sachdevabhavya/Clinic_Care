@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments Viewer</title>
+    <link rel="stylesheet" href="/get_all_appointments.css">
+</head>
+<body>
+
+<div class="container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Menu</h2>
+        <a href="#">Prescription</a>
+        <a href="#">Categories</a>
+        <a href="#">Pages</a>
+        <a href="#">Comments</a>
+        <a href="#">Appearance</a>
+        <a href="#">Health Data</a>
+        <a href="#">Users</a>
+        <a href="#">Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main">
+        <!-- Header -->
+        <div class="header">
+            <h2>Lab Appointments</h2>
+            <div class="doctor-info">
+                <p>Doctor: <%= user %></p> 
+            </div>
+        </div>
+
+        <!-- Appointments List -->
+        <% lab_appointments.forEach(appointment => { %>
+            <div class="appointments-list">
+                <div class="appointment-card">
+                    <h3>Patient Name: <%= appointment.patient_name %></h3>
+                    <p><strong>Age:</strong> <%= appointment.age %></p>
+                    <p><strong>Description:</strong> <%= appointment.test_name %></p>
+                    <button class="approve-btn">Approve</button>
+                </div>
+            </div>
+        <% }) %>
+        
+    </div>
+</div>
+
+</body>
+</html>
