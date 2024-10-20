@@ -7,7 +7,7 @@ const medicineSchema = new mongoose.Schema(
             required: true
         },
         dosage: {
-            type: Number,
+            type: String,
             required: true
         },
         description: {
@@ -16,20 +16,47 @@ const medicineSchema = new mongoose.Schema(
     }
 );
 
+const symptomSchema = new mongoose.Schema(
+    {
+        diagnosis: {
+            type: String,
+            required: true
+        },
+        type: {
+            type: String,
+            required: true
+        },
+        cause: {
+            type: String,
+            required: true
+        }
+    }
+);
+
 const medicalRecordsSchema = new mongoose.Schema(
     {
+        doctor_id: {
+            type: String,
+            required: true
+        },
         patient_name: {
             type: String,
             required: true
         },
         age: {
-            type: Number,
+            type: Number
         },
-        medicines: [medicineSchema]
+        medicines: [medicineSchema],
+        symptoms: [symptomSchema], 
+        d_view_status: {
+            type: Boolean,
+            required: true
+        }
     },
     { timestamps: true }
 );
 
+// Create the model
 const MedicalRecord = mongoose.model("MedicalRecord", medicalRecordsSchema);
 
 module.exports = MedicalRecord;
