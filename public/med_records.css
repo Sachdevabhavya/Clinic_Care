@@ -1,0 +1,90 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: #1e73be;
+    color: white;
+    width: 250px;
+    padding: 20px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+}
+
+.main {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header h2 {
+    margin: 0;
+}
+
+.user-info {
+    text-align: right;
+}
+
+.combined-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.combined-card h3 {
+    margin: 20px 0 10px 0;
+}
+
+.metrics {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 20px;
+}
+
+.metrics .metric {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 30%;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.metric h4 {
+    margin-bottom: 10px;
+}
+
+.metric .value {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.metric .status {
+    color: red;
+}
+
+.file-viewer {
+    margin-top: 20px;
+}

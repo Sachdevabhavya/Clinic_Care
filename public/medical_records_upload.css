@@ -1,0 +1,231 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f4f8; /* Softer background */
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    min-height: 100vh;
+}
+
+.sidebar {
+    background-color: #1e73be;
+    color: white;
+    width: 250px;
+    padding: 20px;
+}
+
+.sidebar a {
+    color: white;
+    text-decoration: none;
+    display: block;
+    margin: 10px 0;
+    padding: 10px;
+    transition: background 0.3s ease;
+}
+
+.sidebar a:hover {
+    background-color: #0e5c9d;
+    border-radius: 5px;
+}
+
+.main {
+    flex-grow: 1;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Light shadow for the content area */
+    border-radius: 8px;
+    margin: 20px;
+}
+
+h2 {
+    color: #155a8a; 
+    margin-bottom: 20px;
+    font-size: 28px;
+    border-bottom: 3px solid #ccc; /* Adds emphasis with a bottom border */
+    padding-bottom: 10px;
+}
+
+h3 {
+    color: #1e73be;
+    margin-bottom: 15px;
+    font-size: 22px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+}
+
+.form-group input, 
+.form-group textarea, 
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9; /* Subtle background for inputs */
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    font-size: 16px;
+}
+
+.form-group textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+.form-group input:focus, 
+.form-group textarea:focus, 
+.form-group select:focus {
+    border-color: #1e73be;
+    background-color: #eef6ff; /* Light blue background on focus */
+    outline: none;
+    box-shadow: 0 0 10px rgba(30, 115, 190, 0.2);
+}
+
+button {
+    background-color: #1e73be;
+    color: white;
+    padding: 14px 30px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+    background-color: #0e5c9d;
+    transform: translateY(-2px);
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(30, 115, 190, 0.5);
+}
+
+button:active {
+    transform: translateY(0); /* Subtle click feedback */
+}
+
+input[type="number"], 
+input[type="tel"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;  
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.medicine-group {
+    border: 2px solid #ddd;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-color: #f7faff; /* Light background to differentiate each medicine */
+}
+
+.medicine-group .form-group label {
+    font-size: 15px;
+    color: #666;
+}
+
+.medicine-group .form-group input, 
+.medicine-group .form-group textarea {
+    border: 1px solid #ccc;
+}
+
+button.remove-button {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+button.remove-button:hover {
+    background-color: #ff4c4c;
+}
+
+/* Special Styling for Medicine Section */
+h3 {
+    color: #1e73be;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.form-group input[type="text"] {
+    background-color: #f9f9f9;
+}
+
+.medicine-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.medicine-header h4 {
+    margin: 0;
+    color: #1e73be;
+}
+
+.medicine-group {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.remove-btn {
+    background-color: #ff4c4c;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.remove-btn:hover {
+    background-color: #ff1f1f;
+}
+
+.add-btn {
+    background-color: #1e73be;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    display: block;
+    margin: 20px 0;
+}
+
+.add-btn:hover {
+    background-color: #0e5c9d;
+}
+
