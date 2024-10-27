@@ -11,7 +11,7 @@
 <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
-        <h2>Menu</h2>
+        <!-- <h2>Menu</h2>
         <a href="#">Prescription</a>
         <a href="#">Categories</a>
         <a href="#">Pages</a>
@@ -19,7 +19,7 @@
         <a href="#">Appearance</a>
         <a href="#">Health Data</a>
         <a href="#">Users</a>
-        <a href="#">Settings</a>
+        <a href="#">Settings</a> -->
     </div>
 
     <!-- Main Content -->
@@ -41,13 +41,50 @@
                     <p><strong>Description:</strong> <%= appointment.description %></p>
                     <p><strong>Phone No:</strong> <%= appointment.phone_no %></p>
                     <p><strong>Home Address:</strong> <%= appointment.home_address %></p>
-                    <button class="approve-btn">Approve</button>
+                    <button class="approve-btn" onclick="approveAppointment('<%= token %>', '<%= appointment._id %>')">Approve</button>
                 </div>
             </div>
         <% }) %>
         
     </div>
 </div>
+
+<script>
+    function approveAppointment(token, appointmentId) {
+        const url = `/main/doctor_login/${token}/getAllAppointments/${appointmentId}`;
+    
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                approved: true
+            })
+        })
+        .then(response => {
+            console.log('Response status:', response.status);
+            
+            if (!response.ok) {
+                // If response is not ok (status code not in the 200-299 range)
+                throw new Error('Failed to approve appointment');
+            }
+            
+            return response.json();  // Parse the JSON response if status is ok
+        })
+        .then(data => {
+            console.log('Success:', data);
+            alert(data.message);  // Use the message from the server response
+            window.location.reload();  // Reload the page to reflect changes
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error approving appointment.');  // Show a generic error message
+        });
+    }
+    
+    
+</script>
 
 </body>
 </html>

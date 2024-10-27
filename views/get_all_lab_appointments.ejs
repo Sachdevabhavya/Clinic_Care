@@ -11,7 +11,7 @@
 <div class="container">
     <!-- Sidebar -->
     <div class="sidebar">
-        <h2>Menu</h2>
+        <!-- <h2>Menu</h2>
         <a href="#">Prescription</a>
         <a href="#">Categories</a>
         <a href="#">Pages</a>
@@ -19,7 +19,7 @@
         <a href="#">Appearance</a>
         <a href="#">Health Data</a>
         <a href="#">Users</a>
-        <a href="#">Settings</a>
+        <a href="#">Settings</a> -->
     </div>
 
     <!-- Main Content -->
@@ -39,13 +39,40 @@
                     <h3>Patient Name: <%= appointment.patient_name %></h3>
                     <p><strong>Age:</strong> <%= appointment.age %></p>
                     <p><strong>Description:</strong> <%= appointment.test_name %></p>
-                    <button class="approve-btn">Approve</button>
+                    <button class="approve-btn" onclick="approveAppointment('<%= token %>', '<%= appointment._id %>')">Approve</button>
                 </div>
             </div>
         <% }) %>
         
     </div>
 </div>
+
+<script>
+    function approveAppointment(token, appointmentId) {
+        const url = `/main/doctor_login/${token}/lab_appointments/${appointmentId}`;
+    
+        fetch(url, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ approved: true })
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Failed to approve appointment');
+            return response.json();
+        })
+        .then(data => {
+            alert(data.message);
+            window.location.reload();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error approving appointment.');
+        });
+    }
+</script>
+
 
 </body>
 </html>

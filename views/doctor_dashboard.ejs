@@ -5,6 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Dashboard</title>
     <link rel="stylesheet" href="/doctor_dashboards.css">
+    <style>
+        /* Add styles for appointment cards */
+        .appointment-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .appointment-card:hover {
+            transform: scale(1.02);
+        }
+
+        .appointment-card h4 {
+            margin: 0 0 10px 0;
+            color: #2980b9;
+        }
+
+        .appointment-card p {
+            margin: 5px 0;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
     <div class="sidebar">
@@ -32,52 +58,19 @@
                 </div>
             </div>
             
-            <div class="medical-info">
-                <div class="info-card">
-                    <h3>Prescription</h3>
-                    <p>Persistent dry cough for 3 weeks. 
-                        Shortness of breath, especially during exertion.
-                        Fatigue and mild chest discomfort.
-                        No fever or chills</p>
-                </div>
-                <div class="info-card">
-                    <h3>Results</h3>
-                    <p>Chest X-ray: Normal, no signs of pneumonia or lung cancer. <br>
-                        Pulmonary Function Test: Mild obstruction in airflow consistent with bronchitis. <br>
-                        Blood Test: Normal white blood cell count, indicating no active infection. <br>
-                        Oxygen Saturation: 95% on room air.</p>
-                </div>
-            </div>
-            <div class="symptoms-diagnosis">
-                <div class="info-card">
-                    <h3>Symptoms</h3>
-                    <p>Diagnosis: Mild Bronchitis <br>
-                        Type: Chronic, non-infectious <br>
-                        Cause: Likely due to environmental irritants (e.g., pollution, smoking)</p>
-                </div>
-                <div class="info-card">
-                    <h3>Diagnosis</h3>
-                    <p>Diagnosis: Mild Bronchitis  <br>
-                        Type: Chronic, non-infectious <br>
-                        Cause: Likely due to environmental irritants (e.g., pollution, smoking)</p>
-                </div>
-            </div>
-            <div class="metrics">
-                <div class="metric-card">
-                    <h4>Glucose</h4>
-                    <p>97 mg/dl</p>
-                    <span>In the norm</span>
-                </div>
-                <div class="metric-card abnormal">
-                    <h4>Heart rate</h4>
-                    <p>102 bpm</p>
-                    <span>Above the norm</span>
-                </div>
-                <div class="metric-card abnormal">
-                    <h4>Cholesterol</h4>
-                    <p>105 mg/dl</p>
-                    <span>Above the norm</span>
-                </div>
+            <div class="appointments-info">
+                <h3>Recent Appointments</h3>
+                <% if (appointments && appointments.length > 0) { %>
+                    <% appointments.forEach(appointment => { %>
+                        <div class="appointment-card">
+                            <h4>Patient Name: <%= appointment.patient_name %></h4>
+                            <p><strong>Reason:</strong> <%= appointment.description %></p>
+                            <p><strong>Status:</strong> <%= appointment.approved ? "Approved" : "Pending" %></p>
+                        </div>
+                    <% }) %>
+                <% } else { %>
+                    <p>No recent appointments available.</p>
+                <% } %>
             </div>
         </section>
     </div>
