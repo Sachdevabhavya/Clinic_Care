@@ -16,6 +16,7 @@ const book_lab_test = async (req , res) => {
             doctor_id : doctor_id,
             patient_name : obj.name,
             age : age,
+            email : obj.email,
             test_name : test_name,
             approved : false
         }) 
