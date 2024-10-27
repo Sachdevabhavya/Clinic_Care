@@ -17,6 +17,11 @@ const appointment_book = new mongoose.Schema(
             required : true 
         },
 
+        email : {
+            type : String,
+            required : true
+        },
+
         description : {
             type : String
         },
