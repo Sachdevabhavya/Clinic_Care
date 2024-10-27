@@ -5,13 +5,14 @@ const path = require("path")
 const doctors_model = require("./model/doctor_login")
 // const multer = require("multer"); 
 const {user_secret , doctor_secret} = require("./config/jwtconfig")
-
+const Appointment = require("./model/appointment_booking")
 const user_router = require("./routes/user_login_routes")
 const doctor_router = require("./routes/doctor_login_routes")
 const appointment_router = require("./routes/appointment_booking_routes")
 const med_router = require("./routes/medical_routes")
 const lab_router = require("./routes/lab_routes")
 const approve_router = require("./routes/appointment_approve_routes")
+const lab_approve_router = require("./routes/lab_appointment_approve_routes")
 const get_doctors = require("./routes/get_all_doctors")
 const validation_email = require("./routes/validate_email_routes")
 const forgot_password = require("./routes/patient_forgot_pass")
@@ -35,22 +36,28 @@ app.get('/main' , (req ,res) => {
     res.render('main')
 })
 
-app.get('/main/doctor_login/:token/doctor_dashboard', (req, res) => {
+app.get('/main/doctor_login/:token/doctor_dashboard', async(req, res) => {
     const token = req.params.token;
     
-    jwt.verify(token, doctor_secret, (err, decoded) => {
+    jwt.verify(token, doctor_secret, async(err, decoded) => {
         if (err) {
             console.log(err);
             return res.status(403).send("Unauthorized access"); 
         }
         
         const user = {
+            id : decoded.id,
             name: decoded.name,
             email: decoded.email,
             phone_no: decoded.phone_no
         };
+
+        const appointments = await Appointment.find({ doctor_id: user.id })
+                                              .sort({ date: -1 }) // Sort by date, descending (latest first)
+                                              .limit(4)            // Limit to 4 results
+                                              .lean();    
         
-        res.render('doctor_dashboard', {token , obj: user });
+        res.render('doctor_dashboard', {token , obj: user , appointments  : appointments });
     });
 });
 
@@ -98,6 +105,7 @@ app.use('/main', appointment_router)
 app.use('/main',med_router)
 app.use('/main',lab_router)
 app.use('/main',approve_router)
+app.use('/main',lab_approve_router)
 app.use('/main',get_doctors)
 app.use('/main',validation_email)
 app.use('/main',forgot_password)
