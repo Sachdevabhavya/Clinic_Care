@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Approval</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        ul li {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        ul li strong {
+            color: #2980b9;
+        }
+
+        .footer {
+            margin-top: 20px;
+            padding-top: 10px;
+            border-top: 1px solid #ddd;
+            font-size: 14px;
+            color: #888;
+        }
+
+        .highlight {
+            background-color: #ecf0f1;
+            padding: 10px;
+            border-left: 4px solid #2980b9;
+            margin-bottom: 20px;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <h2>Dear {{patient_name}},</h2>
+
+        <div class="highlight">
+            <p>Your appointment with Dr. {{doctor_name}} has been <strong>approved</strong>.</p>
+            <p>Please arrive at the lab within <strong>2 hours</strong> for your scheduled test.</p>
+        </div>
+
+        <p><strong>Appointment Details:</strong></p>
+        <ul>
+            <li><strong>Appointment Date:</strong> {{appointment_date}}</li>
+            <li><strong>Doctor Name:</strong> Dr. {{doctor_name}}</li>
+            <li><strong>Description:</strong> {{appointment_description}}</li>
+            <li><strong>Contact Phone:</strong> {{doctor_phone}}</li>
+        </ul>
+
+        <p>Please arrive on time, and feel free to <a href="mailto:{{doctor_email}}">contact us</a> if you have any questions.</p>
+
+        <p>Best Regards,<br>
+        The Clinic Team</p>
+
+        <div class="footer">
+            <p>This is an automated message, please do not reply.</p>
+            <p>If you did not make this appointment, please contact us immediately.</p>
+        </div>
+    </div>
+</body>
+</html>
